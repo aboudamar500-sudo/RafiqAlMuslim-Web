@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1e5b45">
+  <title>رفيق المسلم</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-icon">☪</div>
+    <div>
+      <h1>رفيق المسلم</h1>
+      <p>رفيقك في طريق الخير</p>
+    </div>
+    <button id="themeToggle" class="theme-toggle" aria-label="تغيير المظهر">☾</button>
+  </header>
+
+  <main id="home" class="container">
+    <section class="welcome">
+      <p class="greeting">السلام عليكم ورحمة الله</p>
+      <h2>أهلاً بك في رفيق المسلم</h2>
+      <p class="muted">اجعل يومك عامراً بذكر الله</p>
+    </section>
+
+    <section class="next-prayer">
+      <div class="prayer-icon">🕌</div>
+      <p>الصلاة القادمة</p>
+      <h2 id="nextPrayer">جارٍ تحديد الصلاة...</h2>
+      <p>الوقت المتبقي للصلاة</p>
+      <h2 id="remaining">--:--:--</h2>
+      <div class="prayer-message">حافظ على صلاتك، فهي نور يومك</div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <h2>مواقيت الصلاة</h2>
+          <p>مواعيد اليوم</p>
+        </div>
+        <button id="locationButton" class="small-button">تحديد موقعي</button>
+      </div>
+      <div class="prayer-list" id="prayerList">
+        <p class="loading">اضغط «تحديد موقعي» لجلب مواقيت الصلاة</p>
+      </div>
+      <p id="locationStatus" class="status"></p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <h2>خدمات رفيق المسلم</h2>
+          <p>كل ما تحتاجه في مكان واحد</p>
+        </div>
+      </div>
+      <div class="services">
+        <button class="service" data-page="quran">
+          <span>📖</span><strong>القرآن الكريم</strong><small>اقرأ وتدبر</small>
+        </button>
+        <button class="service" data-page="adhkar">
+          <span>♡</span><strong>الأذكار</strong><small>حصن يومك</small>
+        </button>
+        <button class="service" data-page="duas">
+          <span>🤲</span><strong>الأدعية</strong><small>ادعُ بقلب حاضر</small>
+        </button>
+        <button class="service" data-page="qibla">
+          <span>🧭</span><strong>القبلة</strong><small>اتجاه الكعبة</small>
+        </button>
+        <button class="service" data-page="tasbeeh">
+          <span>📿</span><strong>التسبيح</strong><small>سبّح واذكر الله</small>
+        </button>
+      </div>
+    </section>
+
+    <footer>رفيق المسلم • رفيقك في طريق الخير</footer>
+  </main>
+
+
+  <section id="quranReader" class="quran-reader" hidden>
+    <header class="quran-toolbar">
+      <button id="quranBack" aria-label="رجوع">‹</button>
+      <div>
+        <div id="quranSurahTitle" class="quran-title">القرآن الكريم</div>
+        <div id="quranPageLabel" class="quran-page-label">صفحة 1 من 604</div>
+      </div>
+      <span></span>
+    </header>
+    <div id="quranSurahIndex" class="quran-surah-index">
+      <input id="quranSurahSearch" type="search" placeholder="ابحث عن سورة..." autocomplete="off">
+      <div id="quranSurahList"></div>
+    </div>
+    <div id="quranPageContainer" class="quran-page-container">
+      <div class="quran-loading">جارٍ تحميل المصحف...</div>
+    </div>
+    <div class="quran-controls">
+      <button id="quranPrevious">السابق</button>
+      <button id="quranNext">التالي</button>
+    </div>
+  </section>
+
+  
+<section id="adhkarPage" class="adhkar-page" hidden>
+  <header class="adhkar-toolbar">
+    <button id="adhkarBack" aria-label="رجوع">‹</button>
+    <h2>الأذكار</h2>
+    <span></span>
+  </header>
+  <div id="adhkarCategories" class="adhkar-categories"></div>
+  <div id="adhkarContent" class="adhkar-content" hidden></div>
+</section>
+
+
+<section id="tasbeehPage" class="tasbeeh-page" hidden>
+  <header class="tasbeeh-toolbar">
+    <button id="tasbeehBack" aria-label="رجوع">‹</button>
+    <h2>📿 السبحة</h2>
+    <span></span>
+  </header>
+  <div id="tasbeehHome" class="tasbeeh-home">
+    <button class="tasbeeh-option" data-mode="prayer">
+      <strong>🕌 أذكار بعد الصلاة</strong>
+      <span>أذكار مرتبة بعد الصلوات المفروضة</span>
+    </button>
+    <button class="tasbeeh-option" data-mode="open">
+      <strong>📿 تسبيح مفتوح</strong>
+      <span>سبّح واستغفر بعدد مفتوح</span>
+    </button>
+  </div>
+  <div id="tasbeehCounter" class="tasbeeh-counter-screen" hidden>
+    <div id="tasbeehTitle" class="tasbeeh-title"></div>
+    <div id="tasbeehProgress" class="tasbeeh-progress"></div>
+    <div id="tasbeehText" class="tasbeeh-text"></div>
+    <div id="tasbeehNumber" class="tasbeeh-number">0</div>
+    <button id="tasbeehTap" class="tasbeeh-tap">سبّح</button>
+    <button id="tasbeehReset" class="tasbeeh-reset">إعادة ضبط</button>
+    <button id="tasbeehExit" class="tasbeeh-exit">خروج</button>
+  </div>
+</section>
+
+
+<section id="duasPage" class="duas-page" hidden>
+  <header class="duas-toolbar">
+    <button id="duasBack" aria-label="رجوع">‹</button>
+    <h2>الأدعية</h2>
+    <span></span>
+  </header>
+  <div id="duasCategories" class="duas-categories"></div>
+  <div id="duasContent" class="duas-content" hidden></div>
+</section>
+
+
+<section id="qiblaPage" class="qibla-page" hidden>
+  <header class="qibla-toolbar">
+    <button id="qiblaBack" aria-label="رجوع">‹</button>
+    <h2>اتجاه القبلة</h2>
+    <span></span>
+  </header>
+  <div class="qibla-content">
+    <p id="qiblaStatus">📍 اضغط لتحديد موقعك</p>
+    <div class="qibla-compass">
+      <div id="qiblaCompass" class="qibla-compass-face">
+        <span class="qibla-north">N</span>
+        <span class="qibla-east">E</span>
+        <span class="qibla-south">S</span>
+        <span class="qibla-west">W</span>
+        <div id="qiblaNeedle" class="qibla-needle">▲</div>
+        <div class="qibla-center">🕋</div>
+      </div>
+    </div>
+    <div id="qiblaResult" class="qibla-result">انتظر حتى يتم تحديد موقعك</div>
+    <button id="qiblaRetry" class="qibla-retry">📍 تحديد موقعي</button>
+  </div>
+</section>
+
+<nav class="bottom-nav">
+    <button class="active" data-page="home"><span>⌂</span>الرئيسية</button>
+    <button data-page="quran"><span>📖</span>القرآن</button>
+    <button data-page="adhkar"><span>♡</span>الأذكار</button>
+  </nav>
+
+  <script src="js/quran.js"></script>\n  <script src="js/adhkar.js"></script>
+<script src="js/tasbeeh.js"></script>
+<script src="js/duas.js"></script>
+<script src="js/qibla.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

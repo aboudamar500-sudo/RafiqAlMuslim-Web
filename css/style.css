@@ -1,0 +1,411 @@
+@font-face {
+  font-family: Rafiq;
+  src: url("../assets/fonts/uthmanic_hafs.ttf") format("truetype");
+}
+:root {
+  color-scheme: light;
+  --primary:#1e5b45;
+  --primary-dark:#164533;
+  --soft:#e7f1ec;
+  --gold:#c49a45;
+  --bg:#f7f9f7;
+  --surface:#fff;
+  --text:#18211d;
+  --muted:#65716b;
+  --border:#e5ebe6;
+}
+:root.dark {
+  color-scheme:dark;
+  --primary:#8fd0b1;
+  --primary-dark:#164533;
+  --soft:#222c26;
+  --gold:#e0bd70;
+  --bg:#101512;
+  --surface:#18201c;
+  --text:#e7eee9;
+  --muted:#aab8b0;
+  --border:#303b34;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,"Noto Naskh Arabic",Arial,sans-serif;
+  padding-bottom:85px;transition:background .2s,color .2s
+}
+button{font:inherit;cursor:pointer}
+.topbar{
+  display:flex;align-items:center;gap:13px;padding:20px;
+  max-width:760px;margin:auto
+}
+.brand-icon{
+  width:48px;height:48px;border-radius:50%;display:grid;
+  place-items:center;background:var(--soft);color:var(--primary);
+  font-size:27px
+}
+.topbar h1{font-size:19px;margin:0}
+.topbar p,.section-heading p,.muted{margin:3px 0 0;color:var(--muted);font-size:13px}
+.theme-toggle{
+  margin-right:auto;border:1px solid var(--border);background:var(--surface);
+  color:var(--text);border-radius:50%;width:42px;height:42px;font-size:20px
+}
+.container{max-width:760px;margin:auto;padding:0 20px}
+.welcome{padding:12px 0 20px}
+.greeting{color:var(--primary);font-weight:600;margin:0 0 8px}
+.welcome h2{font-size:23px;margin:0}
+.next-prayer{
+  background:var(--primary-dark);color:#fff;border-radius:28px;
+  padding:22px;text-align:center
+}
+.prayer-icon{font-size:28px}
+.next-prayer p{margin:7px 0;color:#ffffffc9}
+.next-prayer h2{margin:5px 0;font-size:26px}
+.prayer-message{
+  background:#ffffff1c;border-radius:14px;padding:12px;margin-top:16px;
+  font-size:14px
+}
+.section{margin-top:27px}
+.section-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.section-heading h2{font-size:19px;margin:0}
+.small-button{
+  border:0;border-radius:12px;background:var(--soft);color:var(--primary);
+  padding:9px 12px;font-size:12px;font-weight:600
+}
+.prayer-list{
+  background:var(--surface);border-radius:24px;padding:8px 16px;
+  border:1px solid var(--border)
+}
+.prayer-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 2px;border-bottom:1px solid var(--border)
+}
+.prayer-row:last-child{border:0}
+.prayer-row strong{color:var(--primary)}
+.loading,.status{text-align:center;color:var(--muted);font-size:13px;padding:12px}
+.status{padding:4px}
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.service{
+  min-height:116px;text-align:right;padding:15px;border-radius:20px;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);
+  display:flex;flex-direction:column;align-items:flex-start;gap:5px
+}
+.service span{font-size:25px;color:var(--primary);margin-bottom:3px}
+.service strong{font-size:15px}
+.service small{font-size:12px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:27px 0 12px}
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:5;
+  display:flex;justify-content:space-around;background:var(--surface);
+  border-top:1px solid var(--border);padding:8px 8px max(8px,env(safe-area-inset-bottom))
+}
+.bottom-nav button{
+  flex:1;max-width:none;border:0;background:transparent;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px
+}
+.bottom-nav button span{font-size:21px}
+.bottom-nav button.active{color:var(--primary);font-weight:700}
+@media(min-width:600px){.services{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* قارئ المصحف */
+.quran-reader{
+  position:fixed;inset:0;z-index:20;
+  display:flex;flex-direction:column;
+  background:#efede0;color:#235b44;
+  padding:8px 10px;
+}
+.dark .quran-reader{background:#111914;color:#8fd0b1}
+.quran-toolbar{
+  min-height:58px;display:flex;align-items:center;
+  justify-content:space-between;text-align:center;
+}
+.quran-toolbar button,.quran-controls button{
+  border:0;border-radius:13px;padding:10px 18px;
+  background:#e1ede1;color:#235b44;font-weight:700;
+}
+.dark .quran-toolbar button,.dark .quran-controls button{
+  background:#223127;color:#8fd0b1;
+}
+.quran-title{font-size:18px;font-weight:700}
+.quran-page-label{font-size:11px;color:#787767}
+.dark .quran-page-label{color:#b9b191}
+.quran-page-container{flex:1;min-height:0;padding:3px}
+.quran-paper{
+  height:100%;box-sizing:border-box;
+  display:flex;flex-direction:column;align-items:stretch;
+  background:#fffdf2;border:2px solid #beae7e;
+  border-radius:7px;padding:12px 10px 9px;
+  color:#282823;overflow:hidden;
+}
+.dark .quran-paper{
+  background:#252720;border-color:#746844;color:#efebd8;
+}
+.quran-ornament{
+  flex:none;text-align:center;font-size:13px;
+  font-weight:700;color:#876f39;padding-bottom:8px;
+}
+.dark .quran-ornament{color:#c2a969}
+.quran-lines{
+  flex:1;min-height:0;display:flex;
+  flex-direction:column;justify-content:center;
+}
+.quran-line{
+  flex:1;min-height:0;display:flex;
+  align-items:center;justify-content:center;
+  text-align:center;direction:rtl;
+  font-family:"Rafiq",serif;
+  font-size:clamp(12px,4.2vw,18px);
+  line-height:1.45;white-space:normal;
+  overflow:hidden;color:#282823;
+}
+.dark .quran-line{color:#efebd8}
+.quran-line.surah-header{
+  color:#685b31;font-size:clamp(12px,4vw,17px);
+}
+.dark .quran-line.surah-header{color:#cfb470}
+.quran-footer{
+  flex:none;text-align:center;font-size:12px;
+  color:#787767;padding-top:7px;
+}
+.dark .quran-footer{color:#b9b191}
+.quran-controls{
+  flex:none;display:flex;justify-content:center;
+  align-items:center;gap:18px;padding:8px 0 4px;
+}
+.quran-loading{
+  flex:1;display:grid;place-items:center;
+  text-align:center;color:var(--muted);
+}
+
+/* إخفاء قارئ المصحف عند إغلاقه */
+.quran-reader[hidden] {
+  display: none !important;
+}
+
+.quran-surah-index{
+  flex:1;min-height:0;overflow-y:auto;
+  padding:12px 4px;
+}
+.quran-surah-index[hidden]{display:none!important}
+.quran-surah-index input{
+  width:100%;box-sizing:border-box;
+  padding:13px;border:1px solid var(--border);
+  border-radius:13px;background:var(--surface);
+  color:var(--text);font:inherit;margin-bottom:12px;
+}
+#quranSurahList{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.quran-surah-item{
+  padding:13px 9px;border:1px solid var(--border);
+  border-radius:12px;background:var(--surface);
+  color:var(--text);font:inherit;text-align:center;
+}
+.quran-surah-item:active{
+  background:var(--primary-soft);
+}
+
+/* صفحة الأذكار */
+.adhkar-page{
+  position:fixed;inset:0;z-index:21;
+  display:flex;flex-direction:column;
+  background:var(--bg);color:var(--text);
+  padding:12px;overflow:hidden;
+}
+.adhkar-page[hidden],
+.adhkar-content[hidden]{display:none!important}
+.adhkar-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-bottom:18px;
+}
+.adhkar-toolbar h2{font-size:20px;margin:0}
+.adhkar-toolbar button{
+  width:42px;height:42px;border:0;border-radius:12px;
+  background:var(--surface);color:var(--text);font-size:28px;
+}
+.adhkar-categories{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;overflow-y:auto;padding:4px 0 16px;
+}
+.adhkar-category{
+  min-height:112px;padding:18px 10px;
+  border:1px solid var(--border);border-radius:16px;
+  background:var(--surface);color:var(--text);
+  font:inherit;text-align:center;cursor:pointer;
+}
+.adhkar-category .icon{display:block;font-size:30px;margin-bottom:9px}
+.adhkar-category:active{background:var(--primary-soft)}
+.adhkar-content{flex:1;min-height:0;overflow-y:auto}
+.adhkar-item{
+  padding:18px;margin-bottom:12px;
+  border:1px solid var(--border);border-radius:15px;
+  background:var(--surface);line-height:2;
+}
+.adhkar-text{font-size:17px;margin:0 0 14px}
+.adhkar-progress{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.adhkar-counter{
+  border:0;border-radius:12px;padding:10px 18px;
+  background:var(--primary);color:white;font:inherit;
+}
+.adhkar-counter:disabled{opacity:.55}
+.adhkar-count{color:var(--muted);font-size:14px}
+.adhkar-done{border-color:var(--primary);opacity:.75}
+
+/* السبحة الإلكترونية */
+.tasbeeh-page{
+  position:fixed;inset:0;z-index:22;
+  display:flex;flex-direction:column;
+  padding:18px;
+  background:var(--bg);color:var(--text);
+}
+.tasbeeh-page[hidden],
+.tasbeeh-counter-screen[hidden]{display:none!important}
+.tasbeeh-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:28px;
+}
+.tasbeeh-toolbar h2{margin:0;font-size:22px}
+.tasbeeh-toolbar button{
+  width:42px;height:42px;border:0;border-radius:12px;
+  background:var(--surface);color:var(--text);font-size:28px;
+}
+.tasbeeh-home{
+  display:flex;flex-direction:column;gap:16px;
+}
+.tasbeeh-option{
+  display:flex;flex-direction:column;gap:10px;
+  padding:26px 18px;border:1px solid var(--border);
+  border-radius:17px;background:var(--surface);
+  color:var(--text);font:inherit;text-align:center;
+}
+.tasbeeh-option strong{font-size:21px;color:var(--primary)}
+.tasbeeh-option span{font-size:15px;color:var(--muted)}
+.tasbeeh-counter-screen{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:18px;
+  text-align:center;min-height:0;overflow-y:auto;
+}
+.tasbeeh-title{font-size:22px;font-weight:bold;color:var(--primary)}
+.tasbeeh-progress{font-size:17px;color:var(--muted);white-space:pre-line}
+.tasbeeh-text{
+  font-size:23px;line-height:2;padding:12px;
+}
+.tasbeeh-number{
+  font-size:68px;font-weight:bold;font-variant-numeric:tabular-nums;
+}
+.tasbeeh-tap{
+  width:155px;height:75px;border:0;border-radius:22px;
+  background:var(--primary);color:white;font:inherit;
+  font-size:23px;font-weight:bold;
+}
+.tasbeeh-reset,.tasbeeh-exit{
+  border:0;background:transparent;color:var(--primary);
+  font:inherit;font-size:17px;padding:8px 20px;
+}
+
+/* صفحة الأدعية */
+.duas-page{
+  position:fixed;inset:0;z-index:23;
+  display:flex;flex-direction:column;
+  background:var(--bg);color:var(--text);
+  padding:12px;overflow:hidden;
+}
+.duas-page[hidden],
+.duas-content[hidden]{display:none!important}
+.duas-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-bottom:18px;
+}
+.duas-toolbar h2{font-size:20px;margin:0}
+.duas-toolbar button{
+  width:42px;height:42px;border:0;border-radius:12px;
+  background:var(--surface);color:var(--text);font-size:28px;
+}
+.duas-categories{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;overflow-y:auto;padding:4px 0 16px;
+}
+.duas-category{
+  min-height:112px;padding:18px 10px;
+  border:1px solid var(--border);border-radius:16px;
+  background:var(--surface);color:var(--text);
+  font:inherit;text-align:center;cursor:pointer;
+}
+.duas-category .icon{display:block;font-size:30px;margin-bottom:9px}
+.duas-category:active{background:var(--primary-soft)}
+.duas-content{flex:1;min-height:0;overflow-y:auto}
+.dua-item{
+  padding:19px;margin-bottom:12px;
+  border:1px solid var(--border);border-radius:15px;
+  background:var(--surface);line-height:2;
+}
+.dua-text{font-size:19px;margin:0 0 10px}
+.dua-source{
+  color:var(--muted);font-size:14px;
+  border-top:1px solid var(--border);padding-top:8px;
+}
+
+/* صفحة اتجاه القبلة */
+.qibla-page{
+  position:fixed;inset:0;z-index:24;
+  display:flex;flex-direction:column;
+  padding:12px;background:var(--bg);color:var(--text);
+}
+.qibla-page[hidden]{display:none!important}
+.qibla-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-bottom:18px;
+}
+.qibla-toolbar h2{font-size:20px;margin:0}
+.qibla-toolbar button{
+  width:42px;height:42px;border:0;border-radius:12px;
+  background:var(--surface);color:var(--text);font-size:28px;
+}
+.qibla-content{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:22px;text-align:center;min-height:0;
+}
+#qiblaStatus{color:var(--muted);font-size:17px}
+.qibla-compass{
+  width:min(75vw,300px);aspect-ratio:1;
+  display:grid;place-items:center;
+}
+.qibla-compass-face{
+  position:relative;width:100%;height:100%;
+  border:8px solid var(--border);border-radius:50%;
+  background:var(--surface);
+  box-shadow:0 0 0 5px var(--primary-soft),0 8px 25px #0002;
+}
+.qibla-compass-face span{
+  position:absolute;font-weight:bold;color:var(--muted);
+}
+.qibla-north{top:12px;left:50%;transform:translateX(-50%)}
+.qibla-south{bottom:12px;left:50%;transform:translateX(-50%)}
+.qibla-east{right:15px;top:50%;transform:translateY(-50%)}
+.qibla-west{left:15px;top:50%;transform:translateY(-50%)}
+.qibla-needle{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  color:var(--primary);font-size:76px;
+  transform-origin:center;
+}
+.qibla-center{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:48px;height:48px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--primary-soft);font-size:25px;
+  border:2px solid var(--primary);
+}
+.qibla-result{
+  padding:15px;width:100%;box-sizing:border-box;
+  border-radius:14px;background:var(--surface);
+  border:1px solid var(--border);line-height:2;
+}
+.qibla-retry{
+  border:0;border-radius:13px;padding:14px 28px;
+  background:var(--primary);color:white;
+  font:inherit;font-size:17px;
+}
